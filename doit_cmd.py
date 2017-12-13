@@ -69,7 +69,7 @@ class DoitMain(object):
         :param files: str or list of str.
                       Like ConfigParser.read() param filenames
         """
-        cfg_parser = ConfigParser(allow_no_value=True, delimiters=('=',))
+        cfg_parser = ConfigParser(allow_no_value=True, )
         cfg_parser.optionxform = str  # preserve case of option names
         cfg_parser.read(filenames)
         return cfg_parser
