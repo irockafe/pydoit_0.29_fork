@@ -435,9 +435,21 @@ class TimestampChecker(FileChangedChecker):
         return os.path.getmtime(dep)
 
 
+class TimestampNewerChecker(FileChangedChecker):
+    """Checker that use only the timestamp."""
+
+    def check_modified(self, file_path, file_stat, state):
+        return file_stat.st_mtime > state
+
+    def get_state(self, dep, current_state):
+        """@returns float: mtime for file `dep`"""
+        return os.path.getmtime(dep)
+
 # name of checkers class available
 CHECKERS = {'md5': MD5Checker,
-            'timestamp': TimestampChecker}
+            'timestamp': TimestampChecker,
+            'timestamp_newer': TimestampNewerChecker}
+
 
 
 class DependencyStatus(object):
